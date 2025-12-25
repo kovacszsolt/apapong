@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Names - apaPong</title>
+    <link rel="stylesheet" href="css/playerNames.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="player-names-title">Player Names</h1>
+        <div class="player-input-group">
+            <label class="player-label left" for="leftPlayerInput">Left Player</label>
+            <div class="input-wrapper">
+                <input type="text" 
+                       id="leftPlayerInput" 
+                       class="player-input left" 
+                       maxlength="8" 
+                       autocomplete="off"
+                       placeholder="Enter name">
+            </div>
+        </div>
+        <div class="player-input-group">
+            <label class="player-label right" for="rightPlayerInput">Right Player</label>
+            <div class="input-wrapper">
+                <input type="text" 
+                       id="rightPlayerInput" 
+                       class="player-input right" 
+                       maxlength="8" 
+                       autocomplete="off"
+                       placeholder="Enter name">
+            </div>
+        </div>
+        <div class="error-message" id="playerNamesError"></div>
+        <div class="instructions">TAB: switch | ENTER: start</div>
+        <button class="back-button pixel-button" onclick="window.location.href='index.html'">Back to Menu</button>
+    </div>
+    
+    <script>
+        // Constants
+        const MIN_NAME_LENGTH = 1;
+        const MAX_NAME_LENGTH = 8;
+        const BORDER_WIDTH_NORMAL = '3px';
+        const BORDER_WIDTH_FOCUS = '4px';
+        
+        // DOM Elements
+        const leftPlayerInput = document.getElementById('leftPlayerInput');
+        const rightPlayerInput = document.getElementById('rightPlayerInput');
+        const playerNamesError = document.getElementById('playerNamesError');
+        
+        // Player Names Input Handler
+        const PlayerNamesHandler = {
+            currentInput: 'left',
+            
+            init() {
+                if (!leftPlayerInput || !rightPlayerInput) return;
+                
+                this.setupFocusHandlers();
+                this.setupTabHandlers();
+                this.setupEnterHandlers();
+                this.setupInputHandlers();
+                this.focusLeftInput();
+            },
+            
+            focusLeftInput() {
+                setTimeout(() => {
+                    if (leftPlayerInput) {
+                        leftPlayerInput.focus();
+                        this.updateInputBorderStyles('left');
+                    }
+                }, 100);
+            },
+            
+            updateInputBorderStyles(activeInput) {
+                if (!leftPlayerInput || !rightPlayerInput) return;
+                
+                if (activeInput === 'left') {
+                    leftPlayerInput.style.borderWidth = BORDER_WIDTH_FOCUS;
+                    rightPlayerInput.style.borderWidth = BORDER_WIDTH_NORMAL;
+                } else {
+                    leftPlayerInput.style.borderWidth = BORDER_WIDTH_NORMAL;
+                    rightPlayerInput.style.borderWidth = BORDER_WIDTH_FOCUS;
+                }
+            },
+            
+            setupFocusHandlers() {
+                leftPlayerInput.addEventListener('focus', () => {
+                    this.currentInput = 'left';
+                    this.updateInputBorderStyles('left');
+                });
+                
+                rightPlayerInput.addEventListener('focus', () => {
+                    this.currentInput = 'right';
+                    this.updateInputBorderStyles('right');
+                });
+            },
+            
+            setupTabHandlers() {
+                leftPlayerInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Tab') {
+                        e.preventDefault();
+                        this.switchToRightInput();
+                    }
+                });
+                
+                rightPlayerInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Tab') {
+                        e.preventDefault();
+                        this.switchToLeftInput();
+                    }
+                });
+            },
+            
+            switchToRightInput() {
+                this.currentInput = 'right';
+                rightPlayerInput.focus();
+                this.updateInputBorderStyles('right');
+            },
+            
+            switchToLeftInput() {
+                this.currentInput = 'left';
+                leftPlayerInput.focus();
+                this.updateInputBorderStyles('left');
+            },
+            
+            setupEnterHandlers() {
+                const handleEnter = () => {
+                    const leftName = leftPlayerInput.value.trim();
+                    const rightName = rightPlayerInput.value.trim();
+                    
+                    if (!this.validateNames(leftName, rightName)) {
+                        return;
+                    }
+                    
+                    this.saveNames(leftName, rightName);
+                    this.navigateToPaddleColors();
+                };
+                
+                leftPlayerInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleEnter();
+                    }
+                });
+                
+                rightPlayerInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleEnter();
+                    }
+                });
+            },
+            
+            validateNames(leftName, rightName) {
+                if (leftName.length < MIN_NAME_LENGTH || leftName.length > MAX_NAME_LENGTH) {
+                    if (playerNamesError) {
+                        playerNamesError.textContent = 'Left player name must be 1-8 characters!';
+                    }
+                    return false;
+                }
+                
+                if (rightName.length < MIN_NAME_LENGTH || rightName.length > MAX_NAME_LENGTH) {
+                    if (playerNamesError) {
+                        playerNamesError.textContent = 'Right player name must be 1-8 characters!';
+                    }
+                    return false;
+                }
+                
+                return true;
+            },
+            
+            saveNames(leftName, rightName) {
+                // Save to localStorage to pass to next page
+                localStorage.setItem('leftPlayerName', leftName);
+                localStorage.setItem('rightPlayerName', rightName);
+                
+                // Also try to set global variables if they exist
+                if (typeof leftPlayerName !== 'undefined') {
+                    leftPlayerName = leftName;
+                }
+                if (typeof rightPlayerName !== 'undefined') {
+                    rightPlayerName = rightName;
+                }
+                
+                if (playerNamesError) {
+                    playerNamesError.textContent = '';
+                }
+            },
+            
+            navigateToPaddleColors() {
+                // Navigate to paddle colors page
+                window.location.href = 'paddleColors.html';
+            },
+            
+            setupInputHandlers() {
+                const clearError = () => {
+                    if (playerNamesError) {
+                        playerNamesError.textContent = '';
+                    }
+                };
+                
+                leftPlayerInput.addEventListener('input', clearError);
+                rightPlayerInput.addEventListener('input', clearError);
+            }
+        };
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            PlayerNamesHandler.init();
+            
+            // Load names from localStorage if they exist
+            const savedLeftName = localStorage.getItem('leftPlayerName');
+            const savedRightName = localStorage.getItem('rightPlayerName');
+            if (savedLeftName && leftPlayerInput) {
+                leftPlayerInput.value = savedLeftName;
+            }
+            if (savedRightName && rightPlayerInput) {
+                rightPlayerInput.value = savedRightName;
+            }
+        });
+    </script>
+</body>
+</html>
+

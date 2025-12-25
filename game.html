@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game - apaPong</title>
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <button class="quit-button pixel-button" id="quitBtn" onclick="window.location.href='index.html'">Quit Game</button>
+    <script src="https://unpkg.com/kaplay@3001.0.12/dist/kaplay.js"></script>
+    <script src="core/constants.js"></script>
+    <script src="core/utils.js"></script>
+    <script src="core/main.js"></script>
+    <script src="core/config.js"></script>
+    <script src="core/sound.js"></script>
+    <script src="core/collision.js"></script>
+    <script src="core/score.js"></script>
+    <script src="core/gameOver.js"></script>
+    <script src="core/countdown.js"></script>
+    <script src="core/ballCollisions.js"></script>
+    <script src="scenes/gameScene.js"></script>
+    <script>
+        // Load player names and paddle colors from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load player names
+            const leftName = localStorage.getItem('leftPlayerName');
+            const rightName = localStorage.getItem('rightPlayerName');
+            
+            if (leftName && typeof leftPlayerName !== 'undefined') {
+                leftPlayerName = leftName;
+            }
+            if (rightName && typeof rightPlayerName !== 'undefined') {
+                rightPlayerName = rightName;
+            }
+            
+            // Load paddle colors (config.js already loads them, but update if needed)
+            if (typeof leftPaddleColor !== 'undefined' && typeof rightPaddleColor !== 'undefined') {
+                const savedLeftPaddle = localStorage.getItem('leftPaddleColor');
+                const savedRightPaddle = localStorage.getItem('rightPaddleColor');
+                if (savedLeftPaddle) {
+                    try {
+                        leftPaddleColor = JSON.parse(savedLeftPaddle);
+                    } catch (e) {
+                        console.error('Error loading left paddle color:', e);
+                    }
+                }
+                if (savedRightPaddle) {
+                    try {
+                        rightPaddleColor = JSON.parse(savedRightPaddle);
+                    } catch (e) {
+                        console.error('Error loading right paddle color:', e);
+                    }
+                }
+            }
+            
+            // Start the game scene
+            if (typeof go !== 'undefined') {
+                setTimeout(() => {
+                    go("game");
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
+

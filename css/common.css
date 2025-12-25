@@ -1,0 +1,156 @@
+:root {
+    /* Common Colors */
+    --color-bg-primary: #0a0a0f;
+    --color-bg-pattern: #151520;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #c8c8c8;
+    --color-text-muted: #969696;
+    --color-button-back: #646464;
+    --color-button-back-hover: #7a7a7a;
+    
+    /* Common Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 40px;
+    
+    /* Common Typography */
+    --font-size-button: 20px;
+    --font-family-pixel: 'Courier New', 'Courier', monospace;
+    
+    /* Common Transitions */
+    --transition-fast: 0.1s;
+    --transition-normal: 0.2s;
+    --transition-slow: 0.3s;
+    
+    /* Common Breakpoints */
+    --breakpoint-mobile: 768px;
+    
+    /* Pixel Design Colors */
+    --pixel-border-light: #666;
+    --pixel-border-dark: #222;
+    --pixel-shadow: #000;
+    
+    /* Common Border Width */
+    --border-width: 4px;
+    
+    /* Pixel Size for Background Pattern */
+    --pixel-size: 4px;
+    
+    /* Common Button Sizes */
+    --button-width: 200px;
+    --button-height: 50px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Common Body Styles */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-bg-primary);
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent var(--pixel-size), var(--color-bg-pattern) var(--pixel-size), var(--color-bg-pattern) calc(var(--pixel-size) * 2)),
+        repeating-linear-gradient(90deg, transparent, transparent var(--pixel-size), var(--color-bg-pattern) var(--pixel-size), var(--color-bg-pattern) calc(var(--pixel-size) * 2));
+    background-size: calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2);
+    font-family: var(--font-family-pixel);
+    color: var(--color-text-primary);
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Pixel Art Button Base - Common for all pages */
+.pixel-button {
+    position: relative;
+    border: var(--border-width) solid;
+    border-color: var(--pixel-border-light) var(--pixel-border-dark) var(--pixel-border-dark) var(--pixel-border-light);
+    font-family: var(--font-family-pixel);
+    font-size: var(--font-size-button);
+    font-weight: bold;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    transition: transform var(--transition-fast), filter var(--transition-fast);
+    box-shadow: 
+        4px 4px 0 var(--pixel-shadow),
+        inset 2px 2px 0 rgba(255, 255, 255, 0.1),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pixel-button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+    box-shadow: 
+        6px 6px 0 var(--pixel-shadow),
+        inset 2px 2px 0 rgba(255, 255, 255, 0.15),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pixel-button:active {
+    transform: translateY(1px);
+    filter: brightness(0.85);
+    border-color: var(--pixel-border-dark) var(--pixel-border-light) var(--pixel-border-light) var(--pixel-border-dark);
+    box-shadow: 
+        2px 2px 0 var(--pixel-shadow),
+        inset 2px 2px 0 rgba(0, 0, 0, 0.3),
+        inset -2px -2px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Common Back Button - Used in multiple pages */
+.back-button {
+    width: var(--button-width);
+    height: var(--button-height);
+    background-color: var(--color-button-back);
+}
+
+.back-button:hover {
+    background-color: var(--color-button-back-hover);
+}
+
+/* Common Color Button - Used in paddleColors and settings */
+.color-button {
+    width: 100%;
+    border: var(--border-width) solid;
+    border-color: var(--pixel-border-light) var(--pixel-border-dark) var(--pixel-border-dark) var(--pixel-border-light);
+    font-family: var(--font-family-pixel);
+    font-weight: bold;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform var(--transition-fast), filter var(--transition-fast), border-color var(--transition-fast);
+    box-shadow: 
+        3px 3px 0 var(--pixel-shadow),
+        inset 2px 2px 0 rgba(255, 255, 255, 0.2),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+    image-rendering: pixelated;
+    position: relative;
+}
+
+.color-button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 
+        5px 5px 0 var(--pixel-shadow),
+        inset 2px 2px 0 rgba(255, 255, 255, 0.25),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.color-button:active {
+    transform: translateY(1px);
+    filter: brightness(0.9);
+    border-color: var(--pixel-border-dark) var(--pixel-border-light) var(--pixel-border-light) var(--pixel-border-dark);
+    box-shadow: 
+        1px 1px 0 var(--pixel-shadow),
+        inset 2px 2px 0 rgba(0, 0, 0, 0.3),
+        inset -2px -2px 0 rgba(255, 255, 255, 0.2);
+}
+

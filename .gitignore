@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+.vitest/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

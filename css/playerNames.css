@@ -1,0 +1,155 @@
+@import url('common.css');
+
+:root {
+    /* Colors */
+    --color-bg-secondary: #1e1e28;
+    --color-error: #ff6464;
+    --color-left-player: #64c8ff;
+    --color-right-player: #ff6464;
+    
+    /* Typography */
+    --font-size-title: 48px;
+    --font-size-label: 24px;
+    --font-size-input: 28px;
+    --font-size-error: 18px;
+    --font-size-instruction: 18px;
+    
+    /* Layout */
+    --input-max-width: 400px;
+    --border-width-focus: 5px;
+}
+
+
+body {
+    padding: var(--spacing-xl) var(--spacing-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-names-title {
+    font-size: var(--font-size-title);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+    font-family: var(--font-family-pixel);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 
+        3px 3px 0 var(--pixel-shadow),
+        6px 6px 0 rgba(0, 0, 0, 0.5);
+    image-rendering: pixelated;
+}
+
+.player-input-group {
+    margin: var(--spacing-md) 0;
+    width: 100%;
+    max-width: var(--input-max-width);
+}
+
+.player-label {
+    font-size: var(--font-size-label);
+    margin-bottom: var(--spacing-sm);
+    text-align: left;
+    font-family: var(--font-family-pixel);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.player-label.left {
+    color: var(--color-left-player);
+    text-shadow: 2px 2px 0 var(--pixel-shadow);
+}
+
+.player-label.right {
+    color: var(--color-right-player);
+    text-shadow: 2px 2px 0 var(--pixel-shadow);
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.player-input {
+    width: 100%;
+    height: var(--button-height);
+    padding: 0 15px;
+    font-size: var(--font-size-input);
+    background-color: var(--color-bg-secondary);
+    border: var(--border-width) solid;
+    color: var(--color-text-primary);
+    font-family: var(--font-family-pixel);
+    font-weight: bold;
+    image-rendering: pixelated;
+    box-shadow: 
+        inset 2px 2px 0 var(--pixel-border-dark),
+        inset -2px -2px 0 var(--pixel-border-light);
+}
+
+.player-input.left {
+    border-color: var(--color-left-player);
+}
+
+.player-input.right {
+    border-color: var(--color-right-player);
+}
+
+.player-input:focus {
+    outline: none;
+    border-width: var(--border-width-focus);
+    box-shadow: 
+        inset 2px 2px 0 var(--pixel-border-dark),
+        inset -2px -2px 0 var(--pixel-border-light),
+        0 0 0 2px var(--color-left-player);
+}
+
+.player-input.right:focus {
+    box-shadow: 
+        inset 2px 2px 0 var(--pixel-border-dark),
+        inset -2px -2px 0 var(--pixel-border-light),
+        0 0 0 2px var(--color-right-player);
+}
+
+.error-message {
+    color: var(--color-error);
+    font-size: var(--font-size-error);
+    margin-top: var(--spacing-sm);
+    min-height: 25px;
+    text-align: center;
+    font-family: var(--font-family-pixel);
+    font-weight: bold;
+    text-shadow: 2px 2px 0 var(--pixel-shadow);
+}
+
+.instructions {
+    margin-top: var(--spacing-lg);
+    font-size: var(--font-size-instruction);
+    color: var(--color-text-secondary);
+    text-align: center;
+    font-family: var(--font-family-pixel);
+    border: 2px solid var(--pixel-border-dark);
+    padding: var(--spacing-sm);
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        inset 2px 2px 0 var(--pixel-border-light),
+        inset -2px -2px 0 var(--pixel-border-dark);
+    width: 100%;
+    max-width: var(--input-max-width);
+}
+
+.back-button {
+    margin-top: var(--spacing-lg);
+}
+
+

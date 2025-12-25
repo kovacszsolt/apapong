@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>apaPong</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="menu">
+        <h1 class="menu-title">apaPong</h1>
+        <p class="menu-subtitle">Two Player Mode</p>
+        <button class="menu-button pixel-button start-button" id="startBtn">Start Game</button>
+        <button class="menu-button pixel-button settings-button" id="settingsBtn">Settings</button>
+        <button class="menu-button pixel-button howto-button" id="howToBtn">How to Play</button>
+        <div class="controls-info">
+            <p>Left Player: W/S</p>
+            <p>Right Player: Up/Down</p>
+        </div>
+    </div>
+    
+    
+    <script>
+        // Button Handlers
+        const ButtonHandlers = {
+            init() {
+                this.setupMenuButtons();
+                this.setupKeyboardShortcuts();
+            },
+            
+            setupMenuButtons() {
+                const startBtn = document.getElementById('startBtn');
+                const settingsBtn = document.getElementById('settingsBtn');
+                const howToBtn = document.getElementById('howToBtn');
+                
+                if (startBtn) {
+                    startBtn.addEventListener('click', () => {
+                        window.location.href = 'playerNames.html';
+                    });
+                }
+                
+                if (settingsBtn) {
+                    settingsBtn.addEventListener('click', () => {
+                        window.location.href = 'settings.html';
+                    });
+                }
+                
+                if (howToBtn) {
+                    howToBtn.addEventListener('click', () => {
+                        window.location.href = 'howto.html';
+                    });
+                }
+            },
+            
+            setupKeyboardShortcuts() {
+                document.addEventListener('keydown', (e) => {
+                    const menu = document.getElementById('menu');
+                    if (!menu || menu.classList.contains('hidden')) {
+                        return;
+                    }
+                    
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        window.location.href = 'playerNames.html';
+                    }
+                });
+            }
+        };
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            ButtonHandlers.init();
+        });
+    </script>
+</body>
+</html>
