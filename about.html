@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rólunk - apaPong</title>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .about-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #fff;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+        .about-title {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        .about-section {
+            margin-bottom: 25px;
+        }
+        .about-section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+        .about-section p {
+            margin-bottom: 10px;
+        }
+        .about-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .about-section li {
+            margin-bottom: 8px;
+        }
+        .tech-badge {
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+            padding: 4px 8px;
+            margin: 4px;
+            font-size: 0.9em;
+        }
+        .version-info {
+            background: rgba(100, 200, 255, 0.1);
+            border-left: 3px solid #64c8ff;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        .back-button {
+            display: block;
+            margin: 30px auto 0;
+            text-align: center;
+        }
+        .link {
+            color: #64c8ff;
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <h1 class="about-title">Rólunk</h1>
+        
+        <div class="about-section">
+            <h2>Mi az apaPong?</h2>
+            <p>
+                Az <strong>apaPong</strong> egy klasszikus kétjátékos Pong játék, amelyet a modern webes technológiákkal 
+                fejlesztettünk. A játék célja, hogy két játékos egymás ellen játszhasson egy egyszerű, de izgalmas 
+                ping-pong stílusú játékban.
+            </p>
+            <p>
+                A játék teljes mértékben a böngészőben fut, nincs szükség telepítésre vagy regisztrációra. 
+                Egyszerűen nyisd meg az oldalt és kezdj el játszani!
+            </p>
+        </div>
+
+        <div class="about-section">
+            <h2>Játékverzió</h2>
+            <div class="version-info">
+                <p><strong>Verzió:</strong> 1.0.0</p>
+                <p><strong>Fejlesztés dátuma:</strong> 2024</p>
+                <p><strong>Licenc:</strong> Nyílt forráskódú, személyes használatra</p>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Főbb jellemzők</h2>
+            <ul>
+                <li><strong>Kétjátékos mód:</strong> Helyi többjátékos játék egyetlen eszközön</li>
+                <li><strong>Testreszabható játékosnevek:</strong> Adj nevet mindkét játékosnak</li>
+                <li><strong>Színválasztás:</strong> Válassz színt az ütőknek és a labdának</li>
+                <li><strong>Dinamikus labdasebesség:</strong> A labda gyorsul minden ütés után</li>
+                <li><strong>Hanghatások:</strong> Hangok a labda ütközésekor</li>
+                <li><strong>Pontszám rendszer:</strong> Az első 5 pontot elérő játékos nyer</li>
+                <li><strong>Visszaszámlálás:</strong> Minden új kör előtt visszaszámlálás</li>
+            </ul>
+        </div>
+
+        <div class="about-section">
+            <h2>Technológiák</h2>
+            <p>A játék a következő technológiákkal készült:</p>
+            <div>
+                <span class="tech-badge">Kaplay.js v3001.0.12</span>
+                <span class="tech-badge">JavaScript (ES6+)</span>
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3</span>
+                <span class="tech-badge">Vitest</span>
+            </div>
+            <p style="margin-top: 15px;">
+                A <strong>Kaplay.js</strong> egy modern, könnyű JavaScript játékfejlesztő keretrendszer, 
+                amely lehetővé teszi a gyors és hatékony játékfejlesztést.
+            </p>
+        </div>
+
+        <div class="about-section">
+            <h2>Vezérlés</h2>
+            <ul>
+                <li><strong>Bal játékos:</strong> <code>W</code> (fel) / <code>S</code> (le)</li>
+                <li><strong>Jobb játékos:</strong> <code>↑</code> (fel) / <code>↓</code> (le)</li>
+                <li><strong>Játék közben:</strong> <code>ESC</code> (menü) / <code>R</code> (újraindítás)</li>
+            </ul>
+        </div>
+
+        <div class="about-section">
+            <h2>Projekt struktúra</h2>
+            <p>A projekt moduláris felépítésű:</p>
+            <ul>
+                <li><code>core/</code> - Alapvető játéklogika</li>
+                <li><code>scenes/</code> - Játékjelenetek</li>
+                <li><code>css/</code> - Stíluslapok</li>
+                <li><code>tests/</code> - Unit tesztek</li>
+            </ul>
+        </div>
+
+        <div class="about-section">
+            <h2>Fejlesztés és tesztelés</h2>
+            <p>
+                A projekt tartalmaz unit teszteket a Vitest keretrendszerrel. A tesztek futtatásához:
+            </p>
+            <div class="version-info">
+                <code>npm install</code><br>
+                <code>npm test</code><br>
+                <code>npm run test:coverage</code>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Kapcsolat</h2>
+            <p>
+                Kérdéseid, javaslataid vagy hibajelentéseid esetén kérjük, használd a 
+                <a href="https://github.com/kovacszsolt/apapong-private" class="link" target="_blank">GitHub repository</a> 
+                Issues szekcióját.
+            </p>
+        </div>
+
+        <div class="about-section">
+            <h2>Köszönet</h2>
+            <p>
+                Köszönjük, hogy játszol az apaPong-gal! Reméljük, élvezed a játékot. 
+                Ha tetszik a játék, oszd meg barátaiddal!
+            </p>
+        </div>
+
+        <a href="index.html" class="back-button pixel-button">Vissza a főoldalra</a>
+    </div>
+</body>
+</html>
+

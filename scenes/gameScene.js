@@ -146,6 +146,7 @@ scene("game", () => {
 
     resetBall();
     createScoreDisplay();
+    createSpeedDisplay();
     setupControls();
 
     // Main game loop
@@ -160,6 +161,7 @@ scene("game", () => {
         // Move ball (only if countdown is not active)
         if (ball && !gameOver && ball.velocity && !countdownActive) {
             ball.move(ball.velocity.x * dt(), ball.velocity.y * dt());
+            updateSpeedDisplay();
         }
     });
 

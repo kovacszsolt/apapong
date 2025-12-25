@@ -106,9 +106,13 @@ body {
 
 /* Common Back Button - Used in multiple pages */
 .back-button {
+    display: inline-block;
     width: var(--button-width);
     height: var(--button-height);
     background-color: var(--color-button-back);
+    text-decoration: none;
+    text-align: center;
+    line-height: var(--button-height);
 }
 
 .back-button:hover {

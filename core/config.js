@@ -31,11 +31,15 @@ if (Array.isArray(rightPaddleColor)) {
     rightPaddleColor = [...rightPaddleColor];
 }
 
+// Load game mode from localStorage
+let gameMode = loadFromLocalStorage('gameMode', GAME_CONFIG.GAME_MODE.DEFAULT);
+
 // Game Object References
 let leftPaddle;
 let rightPaddle;
 let ball;
 let scoreText;
+let speedText = null;
 let countdownText = null;
 let countdownActive = false;
 let countdownValue = GAME_CONFIG.COUNTDOWN.START_VALUE;

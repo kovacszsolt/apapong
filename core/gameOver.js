@@ -48,11 +48,33 @@ function createRestartInstructions() {
  * Checks if game is over and displays winner screen
  */
 function checkGameOver() {
-    const winScore = GAME_CONFIG.SCORE.WIN_SCORE;
-    if (leftScore >= winScore || rightScore >= winScore) {
+    let isGameOver = false;
+    let winner = null;
+    
+    // Ensure gameMode is defined, fallback to default
+    const currentGameMode = typeof gameMode !== 'undefined' ? gameMode : GAME_CONFIG.GAME_MODE.DEFAULT;
+    
+    if (currentGameMode === GAME_CONFIG.GAME_MODE.LEAD_BY_THREE) {
+        // Lead by three mode: win if leading by 3 points
+        const scoreDiff = Math.abs(leftScore - rightScore);
+        if (scoreDiff >= GAME_CONFIG.GAME_MODE.LEAD_THRESHOLD) {
+            // Also need to ensure at least one player has scored
+            if (leftScore > 0 || rightScore > 0) {
+                isGameOver = true;
+                winner = leftScore > rightScore ? leftPlayerName : rightPlayerName;
+            }
+        }
+    } else {
+        // Fixed score mode: win if reaching WIN_SCORE
+        const winScore = GAME_CONFIG.SCORE.WIN_SCORE;
+        if (leftScore >= winScore || rightScore >= winScore) {
+            isGameOver = true;
+            winner = leftScore >= winScore ? leftPlayerName : rightPlayerName;
+        }
+    }
+    
+    if (isGameOver) {
         gameOver = true;
-        const winner = leftScore >= winScore ? leftPlayerName : rightPlayerName;
-        
         createGameOverOverlay();
         createWinnerText(winner);
         createRestartInstructions();

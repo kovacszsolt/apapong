@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,67 +10,16 @@
     <div id="menu">
         <h1 class="menu-title">apaPong</h1>
         <p class="menu-subtitle">Two Player Mode</p>
-        <button class="menu-button pixel-button start-button" id="startBtn">Start Game</button>
-        <button class="menu-button pixel-button settings-button" id="settingsBtn">Settings</button>
-        <button class="menu-button pixel-button howto-button" id="howToBtn">How to Play</button>
+        <a href="playerNames.html" class="menu-button pixel-button start-button">Start Game</a>
+        <a href="settings.html" class="menu-button pixel-button settings-button">Settings</a>
+        <a href="howto.html" class="menu-button pixel-button howto-button">How to Play</a>
         <div class="controls-info">
             <p>Left Player: W/S</p>
             <p>Right Player: Up/Down</p>
         </div>
+        <div class="privacy-link">
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
     </div>
-    
-    
-    <script>
-        // Button Handlers
-        const ButtonHandlers = {
-            init() {
-                this.setupMenuButtons();
-                this.setupKeyboardShortcuts();
-            },
-            
-            setupMenuButtons() {
-                const startBtn = document.getElementById('startBtn');
-                const settingsBtn = document.getElementById('settingsBtn');
-                const howToBtn = document.getElementById('howToBtn');
-                
-                if (startBtn) {
-                    startBtn.addEventListener('click', () => {
-                        window.location.href = 'playerNames.html';
-                    });
-                }
-                
-                if (settingsBtn) {
-                    settingsBtn.addEventListener('click', () => {
-                        window.location.href = 'settings.html';
-                    });
-                }
-                
-                if (howToBtn) {
-                    howToBtn.addEventListener('click', () => {
-                        window.location.href = 'howto.html';
-                    });
-                }
-            },
-            
-            setupKeyboardShortcuts() {
-                document.addEventListener('keydown', (e) => {
-                    const menu = document.getElementById('menu');
-                    if (!menu || menu.classList.contains('hidden')) {
-                        return;
-                    }
-                    
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        window.location.href = 'playerNames.html';
-                    }
-                });
-            }
-        };
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            ButtonHandlers.init();
-        });
-    </script>
 </body>
 </html>

@@ -24,6 +24,12 @@ const GAME_CONFIG = {
         TEXT_SIZE: 36,
         CHAR_WIDTH: 18,
     },
+    GAME_MODE: {
+        FIXED_SCORE: 'fixed_score',
+        LEAD_BY_THREE: 'lead_by_three',
+        DEFAULT: 'fixed_score',
+        LEAD_THRESHOLD: 3,
+    },
     COUNTDOWN: {
         START_VALUE: 3,
         INTERVAL: 1.0,

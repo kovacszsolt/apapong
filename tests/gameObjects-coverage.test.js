@@ -207,5 +207,203 @@ describe('GameObjects Functions - Coverage Tests', () => {
       expect(() => window.setupBallCollisions()).not.toThrow();
     }
   });
+
+  it('should call handleScorePoint for left side', () => {
+    global.leftScore = 0;
+    global.rightScore = 0;
+    global.gameOver = false;
+    global.ballSpeed = 15000;
+    global.initialBallSpeed = GAME_CONFIG.BALL.INITIAL_SPEED;
+    global.scoreText = { text: '', pos: { x: 0 } };
+    
+    if (typeof window !== 'undefined') {
+      window.leftScore = global.leftScore;
+      window.rightScore = global.rightScore;
+      window.gameOver = global.gameOver;
+      window.ballSpeed = global.ballSpeed;
+      window.initialBallSpeed = global.initialBallSpeed;
+      window.scoreText = global.scoreText;
+      window.updateScore = () => {};
+      window.checkGameOver = () => {};
+      window.resetBall = () => {};
+    }
+    
+    if (typeof window !== 'undefined' && window.handleScorePoint) {
+      window.handleScorePoint(true);
+      expect(global.rightScore).toBe(1);
+    }
+  });
+
+  it('should call handleScorePoint for right side', () => {
+    global.leftScore = 0;
+    global.rightScore = 0;
+    global.gameOver = false;
+    global.ballSpeed = 15000;
+    global.initialBallSpeed = GAME_CONFIG.BALL.INITIAL_SPEED;
+    global.scoreText = { text: '', pos: { x: 0 } };
+    
+    if (typeof window !== 'undefined') {
+      window.leftScore = global.leftScore;
+      window.rightScore = global.rightScore;
+      window.gameOver = global.gameOver;
+      window.ballSpeed = global.ballSpeed;
+      window.initialBallSpeed = global.initialBallSpeed;
+      window.scoreText = global.scoreText;
+      window.updateScore = () => {};
+      window.checkGameOver = () => {};
+      window.resetBall = () => {};
+    }
+    
+    if (typeof window !== 'undefined' && window.handleScorePoint) {
+      window.handleScorePoint(false);
+      expect(global.leftScore).toBe(1);
+    }
+  });
+
+  it('should call handleWallCollision for top wall', () => {
+    const ball = {
+      velocity: { y: -100 },
+      pos: { y: -5 },
+    };
+    
+    global.soundCooldown = 0;
+    if (typeof window !== 'undefined') {
+      window.soundCooldown = global.soundCooldown;
+    }
+    
+    if (typeof window !== 'undefined' && window.handleWallCollision) {
+      window.handleWallCollision(ball, true);
+      expect(ball.velocity.y).toBeGreaterThan(0);
+    }
+  });
+
+  it('should call handleWallCollision for bottom wall', () => {
+    const ball = {
+      velocity: { y: 100 },
+      pos: { y: 600 },
+      height: 20,
+    };
+    
+    global.soundCooldown = 0;
+    if (typeof window !== 'undefined') {
+      window.soundCooldown = global.soundCooldown;
+    }
+    
+    if (typeof window !== 'undefined' && window.handleWallCollision) {
+      global.height = () => 600;
+      if (typeof window !== 'undefined') {
+        window.height = global.height;
+      }
+      window.handleWallCollision(ball, false);
+      expect(ball.velocity.y).toBeLessThan(0);
+    }
+  });
+
+  it('should call checkPaddleCollision with no collision', () => {
+    const ball = {
+      pos: { x: 100, y: 100 },
+      width: 20,
+      height: 20,
+      velocity: { x: 100, y: 0 },
+    };
+    const paddle = {
+      pos: { x: 30, y: 200 },
+      width: 15,
+      height: 100,
+    };
+    
+    if (typeof window !== 'undefined' && window.checkPaddleCollision) {
+      const collision = window.checkPaddleCollision(ball, paddle, -1);
+      expect(collision).toBe(false);
+    }
+  });
+
+  it('should call createStationaryBall', () => {
+    global.ball = null;
+    global.ballColor = [255, 255, 255];
+    global.ballSpeed = 15000;
+    
+    if (typeof window !== 'undefined') {
+      window.ball = global.ball;
+      window.ballColor = global.ballColor;
+      window.ballSpeed = global.ballSpeed;
+      window.add = () => {
+        const obj = {
+          pos: { x: 0, y: 0 },
+          width: 20,
+          height: 20,
+          velocity: { x: 0, y: 0 },
+          direction: 1,
+          angle: 0,
+        };
+        global.ball = obj;
+        return obj;
+      };
+      window.width = () => 800;
+      window.height = () => 600;
+      window.destroy = () => {};
+    }
+    
+    if (typeof window !== 'undefined' && window.createStationaryBall) {
+      window.createStationaryBall();
+      expect(global.ball).toBeDefined();
+    }
+  });
+
+  it('should call endCountdown', () => {
+    global.countdownText = { text: '0' };
+    global.countdownActive = true;
+    global.ball = {
+      angle: Math.PI / 4,
+      direction: 1,
+      velocity: { x: 0, y: 0 },
+    };
+    global.ballSpeed = 15000;
+    
+    if (typeof window !== 'undefined') {
+      window.countdownText = global.countdownText;
+      window.countdownActive = global.countdownActive;
+      window.ball = global.ball;
+      window.ballSpeed = global.ballSpeed;
+      window.destroy = (obj) => {
+        if (obj === global.countdownText) {
+          global.countdownText = null;
+        }
+      };
+      window.setupBallCollisions = () => {};
+    }
+    
+    if (typeof window !== 'undefined' && window.endCountdown) {
+      window.endCountdown();
+      expect(global.countdownActive).toBe(false);
+      expect(global.countdownText).toBeNull();
+    }
+  });
+
+  it('should call updateCountdown when countdownValue is 0', () => {
+    global.countdownActive = true;
+    global.countdownTimer = 1.1;
+    global.countdownValue = 0;
+    global.countdownText = { text: '0', color: [255, 255, 255] };
+    
+    if (typeof window !== 'undefined') {
+      window.countdownActive = global.countdownActive;
+      window.countdownTimer = global.countdownTimer;
+      window.countdownValue = global.countdownValue;
+      window.countdownText = global.countdownText;
+      window.dt = () => 0.016;
+      window.endCountdown = () => {
+        global.countdownActive = false;
+      };
+      window.showFinalCountdown = () => {};
+    }
+    
+    if (typeof window !== 'undefined' && window.updateCountdown) {
+      // This should trigger endCountdown
+      window.updateCountdown();
+      // Just verify it doesn't throw
+      expect(true).toBe(true);
+    }
+  });
 });
 

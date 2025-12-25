@@ -73,11 +73,15 @@ body {
 }
 
 .menu-button {
+    display: inline-block;
     width: var(--button-width);
     height: var(--button-height);
     margin: var(--spacing-sm);
     padding: 0;
     position: relative;
+    text-decoration: none;
+    text-align: center;
+    line-height: var(--button-height);
 }
 
 .start-button {
@@ -120,5 +124,23 @@ body {
 
 .controls-info p {
     margin: var(--spacing-xs) 0;
+}
+
+.privacy-link {
+    margin-top: var(--spacing-md);
+    text-align: center;
+}
+
+.privacy-link a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-family: var(--font-family-pixel);
+    transition: color 0.2s;
+}
+
+.privacy-link a:hover {
+    color: var(--color-text-secondary);
+    text-decoration: underline;
 }
 

@@ -218,5 +218,109 @@ describe('Utils Functions - Coverage Tests', () => {
       expect(() => window.exportForTesting({ testFunc })).not.toThrow();
     }
   });
+
+  it('should call formatBallSpeed', () => {
+    global.ballSpeed = 15000;
+    if (typeof window !== 'undefined') {
+      window.ballSpeed = global.ballSpeed;
+    }
+    
+    if (typeof window !== 'undefined' && window.formatBallSpeed) {
+      const result = window.formatBallSpeed(15000);
+      expect(result).toBe('Speed: 100%');
+    }
+  });
+
+  it('should call formatBallSpeed with different speed', () => {
+    if (typeof window !== 'undefined' && window.formatBallSpeed) {
+      const result = window.formatBallSpeed(30000);
+      expect(result).toBe('Speed: 200%');
+    }
+  });
+
+  it('should call createSpeedDisplay', () => {
+    global.ballSpeed = 15000;
+    global.speedText = null;
+    
+    if (typeof window !== 'undefined') {
+      window.ballSpeed = global.ballSpeed;
+      window.speedText = global.speedText;
+      window.destroy = () => {};
+      window.add = () => {
+        const obj = {
+          text: 'Speed: 100%',
+          pos: { x: 0, y: 80 },
+        };
+        global.speedText = obj;
+        return obj;
+      };
+      window.width = () => 800;
+    }
+    
+    if (typeof window !== 'undefined' && window.createSpeedDisplay) {
+      window.createSpeedDisplay();
+      expect(global.speedText).toBeDefined();
+    }
+  });
+
+  it('should call updateSpeedDisplay', () => {
+    global.ball = {
+      velocity: { x: 100, y: 100 },
+    };
+    global.ballSpeed = 15000;
+    global.speedText = {
+      text: '',
+      pos: { x: 0 },
+    };
+    
+    if (typeof window !== 'undefined') {
+      window.ball = global.ball;
+      window.ballSpeed = global.ballSpeed;
+      window.speedText = global.speedText;
+      window.getCurrentBallSpeed = (ball) => {
+        return Math.sqrt(ball.velocity.x * ball.velocity.x + ball.velocity.y * ball.velocity.y);
+      };
+    }
+    
+    if (typeof window !== 'undefined' && window.updateSpeedDisplay) {
+      window.updateSpeedDisplay();
+      expect(global.speedText.text).toContain('Speed:');
+    }
+  });
+
+  it('should call updateSpeedDisplay without ball', () => {
+    global.ball = null;
+    global.speedText = {
+      text: '',
+      pos: { x: 0 },
+    };
+    
+    if (typeof window !== 'undefined') {
+      window.ball = global.ball;
+      window.speedText = global.speedText;
+    }
+    
+    if (typeof window !== 'undefined' && window.updateSpeedDisplay) {
+      // Should return early without error
+      expect(() => window.updateSpeedDisplay()).not.toThrow();
+    }
+  });
+
+  it('should call updateSpeedDisplay without speedText', () => {
+    global.ball = {
+      velocity: { x: 100, y: 100 },
+    };
+    global.speedText = null;
+    
+    if (typeof window !== 'undefined') {
+      window.ball = global.ball;
+      window.speedText = global.speedText;
+    }
+    
+    if (typeof window !== 'undefined' && window.updateSpeedDisplay) {
+      // Should return early without error
+      expect(() => window.updateSpeedDisplay()).not.toThrow();
+    }
+  });
 });
 
